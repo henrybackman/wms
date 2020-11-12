@@ -34,6 +34,9 @@ class StockPicking(models.Model):
         required=True,
         help="It specifies how to release a transfer partially or all at once",
     )
+    zip_code = fields.Char(related="partner_id.zip", store=True)
+    state_id = fields.Many2one(related="partner_id.state_id", store=True)
+    city = fields.Char(related="partner_id.city", store=True)
 
     @api.depends("move_ids.need_release")
     def _compute_need_release(self):
